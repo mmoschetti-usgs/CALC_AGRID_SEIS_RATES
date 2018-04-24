@@ -19,8 +19,9 @@ float calc_seis_rate(struct smoothp* smpp, struct eqcat* eqcatp, struct compl_le
 void convert_eq_nos_rates(struct rates* seisr, struct compl_levels* compl, struct smoothp* smp, struct catalog* cat, struct boundaries* reg);
 float get_sigma_value(struct smoothp* smp, struct eqcat* catn, int eqno);
 void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * catv, float mag);
+void write_asum_to_csvfile(struct rates* seisr, char *fbasenm, struct catalog * catv, struct boundaries * boundR, float mag);
 void write_unsmoothed_asum_to_file(struct rates* seisr, char *fbasenm);
-void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, char *outf);
+void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, char *outf, struct boundaries * region);
 void initialize_params(struct compl_levels* cat_comp, struct boundaries* reg, struct catalog* cat, struct smoothp* smp);
 void read_completenessVals(struct compl_levels* cat_comp);
 void assign_variable_completeness_eqs(struct eqcat* cat, struct compl_levels* compl_vals);

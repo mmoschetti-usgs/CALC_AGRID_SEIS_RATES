@@ -15,7 +15,7 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
   char fileout[200];
 //  struct header headr;
 
-fprintf(stderr,"Got here...\n");
+fprintf(stderr,"Got here 1...\n");
 
 // get rate array and naming based on magnitude input values
   nsrc=seisr->nv;
@@ -78,7 +78,39 @@ fprintf(stderr,"Got here...\n");
   ierr=fwrite(asum,4,nsrc,fpout);
   fclose(fpout);
 //  fprintf(stderr,"Wrote M%.2f results to file, %s.\n", mag, fileout);
-  
+
+}
+
+/*--------------------------------------------------------------------------*/
+void write_asum_to_csvfile(struct rates* seisr, char *fbasenm, struct catalog * catv, struct boundaries * boundR, float mag)
+/*--------------------------------------------------------------------------*/
+{ 
+  FILE *fpout;
+  int nsrc, cnt, ierr, out2=0;
+  int iy, ix;
+  float diffth=1e-1;
+//  float lon[NV], lat[NV];
+  char fileout[200];
+//  struct header headr;
+
+// compute lon/lat array
+// get rate array and naming based on magnitude input values
+  nsrc=seisr->nv;
+// Magnitudes
+  if ( fabsf(mag-0.0)<diffth ) {
+    sprintf(fileout,"%s_M0.csv", fbasenm);
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
+    fpout=fopen(fileout,"w");
+    for(cnt=0; cnt<nsrc; cnt++) {
+      iy=cnt/boundR->nsx;
+      ix=cnt-iy*boundR->nsx;
+      fprintf(fpout,"%.3f,%.3f,GR,%.6f \n",boundR->minlon+ix*boundR->dlon,boundR->maxlat-iy*boundR->dlat,seisr->asum[cnt]);
+    }
+    fclose(fpout);
+  }
+  else {
+    fprintf(stderr,"No csvfile write option for M~=0\n");
+  }
 
 }
 

@@ -48,10 +48,10 @@ int check_args(int argc, char **argv, char *paramf, char *summf, char *paramf_fo
 
 
 /*--------------------------------------------------------------------------*/
-void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, char *outf)
+void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, char *outf, struct boundaries * boundR)
 /*--------------------------------------------------------------------------*/
 {
-  int cnt;
+  int cnt, output_multiple_magnitudes=0;
   float magv;
   float tmpsum=0.0;
 
@@ -65,23 +65,27 @@ void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct cata
   if ( smp->apply_sm ) {
 // M0, 10^a values
     magv=0.0;
+    fprintf(stderr,"Writing to binary file...\n");
     write_asum_to_file(seisr, outf, cat, magv);
+    fprintf(stderr,"Writing to csv file...\n");
+    write_asum_to_csvfile(seisr, outf, cat, boundR, magv);
 // M3.0, 10^(a-3.0b) values
-    magv=3.0;
-    write_asum_to_file(seisr, outf, cat, magv);
+    if ( output_multiple_magnitudes ){
+      magv=3.0;
+      write_asum_to_file(seisr, outf, cat, magv);
 // M3.5, 10^(a-3.5b) values
-    magv=3.5;
-    write_asum_to_file(seisr, outf, cat, magv);
+      magv=3.5;
+      write_asum_to_file(seisr, outf, cat, magv);
 // M4, 10^(a-4b) values
-    magv=4.0;
-    write_asum_to_file(seisr, outf, cat, magv);
+      magv=4.0;
+      write_asum_to_file(seisr, outf, cat, magv);
 // M4.5, 10^(a-4.5b) values
-    magv=4.5;
-    write_asum_to_file(seisr, outf, cat, magv);
-
+      magv=4.5;
+      write_asum_to_file(seisr, outf, cat, magv);
 // M5, 10^(a-5b) values
-    magv=5.0;
-    write_asum_to_file(seisr, outf, cat, magv);
+      magv=5.0;
+      write_asum_to_file(seisr, outf, cat, magv);
+    }
 // M0, 10^a, un-smoothed 
     write_unsmoothed_asum_to_file(seisr, outf);
   }
