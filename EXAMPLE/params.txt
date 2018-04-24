@@ -1,0 +1,33 @@
+# source boundaries
+Min_Lat=24.6 
+Max_Lat=51.0
+Min_Lon=-126.5
+Max_Lon=-100.0
+Inc_Lat=0.1
+Inc_Lon=0.1
+# completeness levels - no adjusting for these calculations
+N_Completeness_Levels=1
+Completeness_Level_yr_1=1963
+Completeness_Level_M_1=4.0
+Variable_Completeness=0
+Catalog_Gaps=0
+# catalog 
+Catalog_Name=wmm_wusext_mod.c3
+End_yr_Catalog=2001
+b_Value=0.8
+dMag_value=0.1
+Min_Magnitude=4.0
+# logicals 
+logical_Effective_Num_Eqs=0
+logical_Cumulative_rates=1
+logical_Adjust_completeness=0
+logical_Apply_smoothing=1
+logical_Adaptive_smoothing=1
+logical_Avg_Neighbor=0
+# smoothing parameters
+Adaptive_Neighbor_Number=5
+Sigma_Min=3.0
+Sigma_Max=200.0
+Gauss_PowerLaw_Kernel=gauss
+#Gauss_PowerLaw_Kernel=powerLaw
+Output_Name=agrd_adN5_c_M4p0_1963_2001

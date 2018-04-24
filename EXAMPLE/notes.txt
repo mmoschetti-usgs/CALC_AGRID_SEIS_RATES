@@ -1,0 +1,2 @@
+Run this example with:
+calc_agrid_seis_rates params.txt new summ.txt
