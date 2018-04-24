@@ -1,6 +1,6 @@
 #define BUFFLEN 300
 #define CLEVELS 10
-#define NV 145000
+#define NV 200000
 #define NEQ 15000
 #define NNUM 10
 #define MAXCHAR 128
